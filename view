@@ -22,8 +22,57 @@
                 </div>
                 <div id="collapse1" class="panel-collapse collapse in">
                     <div class="panel-body">
-                        Разните му там рождени дни, възрасти, имена и т.н.
-                        Ще се вижда от регистрирани
+                        <div class="row">
+                            <table class="table table-hover">
+                                <tr>
+                                    <th>Names: </th>
+                                    <td>
+                                            @if (Model.FirstName != null || Model.FirstName != "")
+                                            {
+                                                <strong>@Model.FirstName</strong>
+                                            }
+                                            @if (Model.LastName != null || Model.LastName != "")
+                                            {
+                                                <strong>@Model.LastName</strong>
+                                            }
+                                            @if(Model.FirstName == null || Model.FirstName == "" && Model.LastName == null || Model.LastName == "")
+                                            {
+
+                                               <strong>(n/a)</strong>
+                                            }
+                                        
+                                     </td>
+                                </tr>
+                                <tr>
+                                    <th>: </th>
+                                    <td>
+                                        @if (Model.Town != null && Model.Town != "")
+                                        {
+                                            <strong>@Model.Town</strong>
+                                        }
+                                        else
+                                        {
+                                            <strong>(n/a)</strong>
+                                        }
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Age: </th>
+                                    <td>
+                                        @if (Model.Birthday != DateTime.Now)
+                                        {
+                                            <strong>@Model.Birthday-@DateTime.Now</strong>
+                                        }
+                                        else
+                                        {
+                                            <strong>(n/a)</strong>
+                                        }
+
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
