@@ -60,9 +60,9 @@
                                 <tr>
                                     <th>Age: </th>
                                     <td>
-                                        @if (Model.Birthday != DateTime.Now)
+                                        @if (Model.Birthday.Year != DateTime.Now.Year)
                                         {
-                                            <strong>@Model.Birthday-@DateTime.Now</strong>
+                                            <strong>@(DateTime.Now.Year - Model.Birthday.Year)</strong>
                                         }
                                         else
                                         {
