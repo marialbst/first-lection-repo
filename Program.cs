@@ -40,13 +40,13 @@ namespace _05.PizzaCalories
 
         private static void AddTopping(string[] tokens)
         {
-            Topping top = new Topping(tokens[1], double.Parse(tokens[2]));
+            Topping top = new Topping(tokens[1], int.Parse(tokens[2]));
             Console.WriteLine($"{top.CalculateToppingCalories():f2}");
         }
 
         private static void AddDough(string[] tokens)
         {
-            Dough dough = new Dough(tokens[1], tokens[2], double.Parse(tokens[3]));
+            Dough dough = new Dough(tokens[1], tokens[2], int.Parse(tokens[3]));
             Console.WriteLine($"{dough.CalculateDoughCalories():f2}");
         }
 
@@ -55,13 +55,13 @@ namespace _05.PizzaCalories
             Pizza pizza = new Pizza(tokens[1], int.Parse(tokens[2]));
 
             tokens = Console.ReadLine().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            Dough dough = new Dough(tokens[1], tokens[2], double.Parse(tokens[3]));
+            Dough dough = new Dough(tokens[1], tokens[2], int.Parse(tokens[3]));
             pizza.Dough = dough;
 
             for (int i = 0; i < pizza.ToppingsCount; i++)
             {
                 tokens = Console.ReadLine().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                Topping top = new Topping(tokens[1], double.Parse(tokens[2]));
+                Topping top = new Topping(tokens[1], int.Parse(tokens[2]));
                 pizza.AddToppingToPizza(top);
             }
 
@@ -69,3 +69,4 @@ namespace _05.PizzaCalories
         }
     }
 }
+
