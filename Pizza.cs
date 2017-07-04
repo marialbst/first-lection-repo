@@ -1,75 +1,71 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace _05.PizzaCalories
 {
-    public class Pizza
+    class Program
     {
-        private string name;
-        private int toppingsCount;
-        private Dough dough;
-        private List<Topping> toppings;
-
-        public Pizza(string name, int toppingsCount)
+        static void Main(string[] args)
         {
-            this.Name = name;
-            this.ToppingsCount = toppingsCount;
-            this.toppings = new List<Topping>();
-        }
+            var command = Console.ReadLine();
 
-
-        public string Name
-        {
-            get { return this.name; }
-            private set
+            while (command != "END")
             {
-                if(string.IsNullOrEmpty(value) || value.Length > 15)
+                var tokens = command.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                try
                 {
-                    throw new ArgumentException("Pizza name should be between 1 and 15 symbols.");
+                    switch (tokens[0])
+                    {
+                        case "Pizza":
+                            AddPizza(tokens);
+                            break;
+                        case "Dough":
+                            AddDough(tokens);
+                            break;
+                        case "Topping":
+                            AddTopping(tokens);
+                            break;
+                        default:
+                            break;
+                    }
                 }
-                this.name = value;
-            }
-        }
-
-        public int ToppingsCount
-        {
-            get { return this.toppingsCount; }
-            private set
-            {
-                if(value < 0 || value > 10)
+                catch (ArgumentException e)
                 {
-                    throw new ArgumentException("Number of toppings should be in range [0..10].");
+                    Console.WriteLine(e.Message);
+                    return;
                 }
-                this.toppingsCount = value;
-            }
-        }
-
-        public double CalculateTotalCalories()
-        {
-            var result = 0d;
-            result += this.dough.CalculateDoughCalories();
-
-            for (int i = 0; i < this.ToppingsCount; i++)
-            {
-               result += this.toppings[i].CalculateToppingCalories();
+                command = Console.ReadLine();
             }
             
-            return result;
         }
 
-        public Dough Dough
+        private static void AddTopping(string[] tokens)
         {
-            set { this.dough = value; }
+            Topping top = new Topping(tokens[1], int.Parse(tokens[2]));
+            Console.WriteLine($"{top.CalculateToppingCalories():f2}");
         }
 
-        public void AddToppingToPizza(Topping topping)
+        private static void AddDough(string[] tokens)
         {
-            this.toppings.Add(topping);
+            Dough dough = new Dough(tokens[1], tokens[2], int.Parse(tokens[3]));
+            Console.WriteLine($"{dough.CalculateDoughCalories():f2}");
         }
 
-        public override string ToString()
+        private static void AddPizza(string[] tokens)
         {
-            return $"{this.Name} – {this.CalculateTotalCalories():f2} Calories.";
+            Pizza pizza = new Pizza(tokens[1], int.Parse(tokens[2]));
+
+            tokens = Console.ReadLine().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            Dough dough = new Dough(tokens[1], tokens[2], int.Parse(tokens[3]));
+            pizza.Dough = dough;
+
+            for (int i = 0; i < pizza.ToppingsCount; i++)
+            {
+                tokens = Console.ReadLine().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                Topping top = new Topping(tokens[1], int.Parse(tokens[2]));
+                pizza.AddToppingToPizza(top);
+            }
+
+            Console.WriteLine(pizza.ToString());
         }
     }
 }
