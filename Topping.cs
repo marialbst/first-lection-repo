@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace _05.PizzaCalories
 {
@@ -11,9 +11,9 @@ namespace _05.PizzaCalories
         private const double Base = 2;
 
         private string type;
-        private double weight;
+        private int weight;
 
-        public Topping(string type, double weight)
+        public Topping(string type, int weight)
         {
             this.Type = type;
             this.Weight = weight;
@@ -32,7 +32,7 @@ namespace _05.PizzaCalories
             }
         }
 
-        private double Weight
+        private int Weight
         {
             get { return this.weight; }
             set
