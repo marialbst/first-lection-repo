@@ -16,9 +16,9 @@ namespace _05.PizzaCalories
         //crispy, chewy or homemade
         private string bakingTechnique;
         //in grams
-        private double weight;
+        private int weight;
 
-        public Dough(string flourType, string backingTechnique, double weight)
+        public Dough(string flourType, string backingTechnique, int weight)
         {
             this.FlourType = flourType;
             this.BakingTechnique = backingTechnique;
@@ -30,7 +30,7 @@ namespace _05.PizzaCalories
             get { return this.flourType; }
             set
             {
-                if (value.ToLower() != "white" && value.ToLower() != "wholegrain" || string.IsNullOrEmpty(value))
+                if (value.ToLower() != "white" && value.ToLower() != "wholegrain")
                 {
                     throw new ArgumentException("Invalid type of dough.");
                 }
@@ -43,7 +43,7 @@ namespace _05.PizzaCalories
             get { return this.bakingTechnique; }
             set
             {
-                if(value.ToLower() != "crispy" && value.ToLower() != "chewy" && value.ToLower() != "homemade" || string.IsNullOrEmpty(value))
+                if(value.ToLower() != "crispy" && value.ToLower() != "chewy" && value.ToLower() != "homemade")
                 {
                     throw new ArgumentException("Invalid type of dough.");
                 }
@@ -51,7 +51,7 @@ namespace _05.PizzaCalories
             }
         }
 
-        private double Weight
+        private int Weight
         {
             get { return this.weight; }
             set
@@ -66,10 +66,12 @@ namespace _05.PizzaCalories
 
         public double CalculateDoughCalories()
         {
-            double flourModifier = this.flourType.ToLower() == "white" ? White : Wholegrain;
-            double backingTechnique = this.bakingTechnique.ToLower() == "crispy" ? Crispy : 
+            double flourModifier = this.FlourType.ToLower() == "white" ? White : Wholegrain;
+
+            double backingTechnique = this.BakingTechnique.ToLower() == "crispy" ? Crispy : 
                                        this.bakingTechnique.ToLower() == "chewy" ? Chewy : Homemade;
-            return Base * this.weight * flourModifier * backingTechnique;
+
+            return (Base * this.weight) * flourModifier * backingTechnique;
         }
     }
 }
