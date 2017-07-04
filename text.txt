@@ -1,6 +1,0 @@
-This is made in GitHub - online.
-
-This is made with TortoiseGit!!!
-
-GitBash added line
-
